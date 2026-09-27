@@ -16,7 +16,7 @@ CREATE TABLE books
     
 );
 
---Ondrej
+--Juraj
 INSERT INTO books VALUES ('978-80-566-1620-8',  'Alchymistova šifra', 'Kevin Sands', 'History/Magic', 2015, true, 90);
 INSERT INTO books VALUES ('978-80-89968-83-1',  'Časonauti', 'Anton Stiffel', 'Sci-fi', 2022, true, 85);
 INSERT INTO books VALUES ('978-80-566-3529-2',  'Posledná šanca', 'Andy Weir', 'Sci-fi', 2021, true, 93);
