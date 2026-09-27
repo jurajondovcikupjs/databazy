@@ -29,6 +29,6 @@ INSERT INTO books VALUES ('978-80-8179-160-4', 'Myšlienky', 'Blaise Pascal', 'F
 --Leonard
 INSERT INTO books VALUES ('9781529538335', 'Scythe', 'Neal Shusterman', 'Sci-fi', 2018, true, 86)	
 INSERT INTO books VALUES ('9781442472464', 'Thunderhead', 'Neal Shusterman', 'Sci-fi', 2019, true, 91)
-INSERT INTO books VALUES ('9788089603572', 'Ústavné pŕavo hmotné', 'Ján Drgonec', 'Odborné a naučné', 2018, true, 60)	
+INSERT INTO books VALUES ('9788089603572', 'Ústavné právo hmotné', 'Ján Drgonec', 'Odborné a naučné', 2018, true, 60)	
 	
 SELECT * FROM books;
