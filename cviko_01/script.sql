@@ -23,7 +23,7 @@ INSERT INTO books VALUES ('978-80-566-3529-2',  'Posledná šanca', 'Andy Weir',
 
 -- Matej
 INSERT INTO books VALUES ('978-0-451-19115-1', 'The Fountainhead', 'Ayn Rand', 'Philosophical Fiction', 1943, true, 72);	
-INSERT INTO books VALUES ('978-0192839572', 'The Charterhouse of Parma', 'Stendhal', 'Psychological Novel', 1839, true, 60):
+INSERT INTO books VALUES ('978-0192839572', 'The Charterhouse of Parma', 'Stendhal', 'Psychological Novel', 1839, true, 60);
 INSERT INTO books VALUES ('978-80-8179-160-4', 'Myšlienky', 'Blaise Pascal', 'Fragments', 1670, true, 77);	
 
 -- Leonard
