@@ -29,6 +29,13 @@ INSERT INTO books VALUES ('978-80-8179-160-4', 'Myšlienky', 'Blaise Pascal', 'F
 --Leonard
 INSERT INTO books VALUES ('9781529538335', 'Scythe', 'Neal Shusterman', 'Sci-fi', 2018, true, 86)	
 INSERT INTO books VALUES ('9781442472464', 'Thunderhead', 'Neal Shusterman', 'Sci-fi', 2019, true, 91)
-INSERT INTO books VALUES ('9788089603572', 'Ústavné právo hmotné', 'Ján Drgonec', 'Odborné a naučné', 2018, true, 60)	
+INSERT INTO books VALUES ('9788089603572', 'Ústavné právo hmotné', 'Ján Drgonec', 'Odborné a naučné', 2018, true, 60)
+
+--Marcela
+INSERT INTO books VALUES('9788089993239', 'Keď srdce zavolá', 'Janette Oke','History/Romantic', 2020, true, 88)
+INSERT INTO books VALUES('9788099925398', 'Úžasný svet depresie', 'John Moe','Odborné a naučné', 2020, true, 78)
+INSERT INTO books VALUES('9788027106066', 'Urban Jungle', 'Igor Josifovic, Judith de Graaff','Hobby', 2017, true, 95)
+
+
 	
 SELECT * FROM books;
