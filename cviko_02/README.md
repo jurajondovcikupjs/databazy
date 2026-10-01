@@ -1,11 +1,3 @@
-# SQL Cvičenia pre databázu `bookdb`
-
-Tento dokument obsahuje 5 praktických úloh na procvičenie SQL dopytov typu `SELECT`. Každá úloha vyžaduje:
-- **Vertikálnu filtráciu:** Výber len vybraných stĺpcov (atribútov).
-- **Horizontálnu filtráciu:** Výber len určitých riadkov na základe podmienky (`WHERE`).
-
----
-
 ## Úloha 1: Novšie Sci-Fi knihy
 **Zadanie:**  
 Vypíš názov (`Title`), autora (`Author`) a rok vydania (`YearPublished`) pre všetky knihy, ktoré patria do žánru `'Sci-fi'` a boli vydané **po roku 2020** (vrátane).
