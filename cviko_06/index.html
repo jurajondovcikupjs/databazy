@@ -1,0 +1,284 @@
+<ul>
+  <li>Definujte:
+    <ul>
+      <li><b>Normalizácia (normalization):</b> Proces organizácie dát v databáze, ktorého cieľom je znížiť duplicitu (redundanciu) dát a eliminovať anomálie pri vkladaní, aktualizácii a mazaní (Insert, Update, Delete anomalies) rozdelením veľkých tabuliek na menšie a definovaním vzťahov medzi nimi.</li>
+      <li><b>Denormalizácia (denormalization):</b> Zámerný proces spájania menších tabuliek do väčších (vnesenie redundancie) s cieľom zrýchliť čítanie dát a znížiť potrebu zložito vykonávaných operácií JOIN.</li>
+      <li><b>Dekompozícia (decomposition):</b> Rozloženie jednej relačnej schémy na dve alebo viac menších relačných schém bez straty informácií (bezstratová dekompozícia) alebo závislostí.</li>
+      <li><b>Relačná schéma (relation schema):</b> Množinový popis štruktúry relácie tvorený názvom relácie a množinou jej atribútov, napr. <i>R(A<sub>1</sub>, A<sub>2</sub>, ..., A<sub>n</sub>)</i>.</li>
+      <li><b>Relácia (relation):</b> Podmnožina kartézskeho súčinu domén jednotlivých atribútov; v praktickom databázovom poňatí ide o tabuľku, kde riadky predstavujú entity (tuply) a stĺpce atribúty.</li>
+      <li><b>Funkčná závislosť (functional dependency):</b> Vzťah medzi dvoma množinami atribútov X a Y v relácii (zápis <i>X → Y</i>), kedy hodnoty atribútov zo skupiny X jednoznačne určujú hodnoty atribútov zo skupiny Y (ak sa zhodujú dvoch riadkov hodnoty v X, musia sa zhodovať aj v Y).</li>
+      <li><b>Triviálna funkčná závislosť (trivial functional dependency):</b> Funkčná závislosť <i>X → Y</i>, kde množina Y je podmnožinou množiny X (<i>Y ⊆ X</i>), napr. <i>{id, meno} → {meno}</i>.</li>
+      <li><b>Kľúčový atribút (key attribute):</b> Atribút, ktorý je súčasťou aspoň jedného kandidátneho kľúča.</li>
+      <li><b>Nekľúčový atribút (non-key attribute):</b> Atribút, ktorý nie je súčasťou žiadneho kandidátneho kľúča.</li>
+      <li><b>Kandidátny kľúč (candidate key):</b> Minimálny nadkľúč – množina atribútov, ktorá jednoznačne identifikuje každý riadok v relácii a z ktorej nie je možné odobrať žiaden atribút bez straty tejto jednoznačnosti.</li>
+      <li><b>Kompozitný kľúč (composite key):</b> Kľúč (kandidátny alebo primárny), ktorý pozostáva z dvoch alebo viacerých atribútov.</li>
+      <li><b>Primárny kľúč (primary key):</b> Zvolený kandidátny kľúč, ktorý slúži ako hlavný unikátny identifikátor riadkov v tabuľke (nesmie obsahovať NULL hodnoty).</li>
+      <li><b>Nadkľúč (super-key):</b> Libovoľná množina atribútov, ktorá jednoznačne identifikuje každý riadok v relácii (môže obsahovať aj nadbytočné atribúty naviac k kandidátnemu kľúču).</li>
+      <li><b>Podkľúč (sub-key):</b> Vlastná podmnožina nejakého kľúča. Sám o sebe nestačí na jednoznačnú identifikáciu riadku.</li>
+      <li><b>1NF (1. normálna forma):</b> Relácia je v 1NF, ak sú všetky jej atribúty atomárne (nedeliteľné hodnoty) a tabuľka neobsahuje opakovateľné skupiny atribútov.</li>
+      <li><b>2NF (2. normálna forma):</b> Relácia je v 2NF, ak je v 1NF a každý nekľúčový atribút je plne funkčne závislý od celého kandidátneho kľúča (neexistuje čiastočná závislosť od časti kompozitného kľúča).</li>
+      <li><b>3NF (3. normálna forma):</b> Relácia je v 3NF, ak je v 2NF a žiaden nekľúčový atribút nie je tranzitívne závislý od kandidátneho kľúča (pre každú netriviálnu závislosť <i>X → Y</i> platí, že X je nadkľúč alebo Y je kľúčový atribút).</li>
+      <li><b>HBCNF / BCNF (Heath-Boyce-Codd Normal Form):</b> Sprísnená verzia 3NF. Relácia je v BCNF, ak pre každú netriviálnu funkčnú závislosť <i>X → Y</i> platí, že X je nadkľúč (aj pre kľúčové atribúty na pravej strane).</li>
+    </ul>
+  </li>
+
+  <li>Analyzujte tabuľku Osoba(id, meno, pohlavie). Určte funkčné závislosti. Čo je kandidátny/nad/pod-kľúč?
+    <p><b>Riešenie:</b></p>
+    <ul>
+      <li><b>Funkčné závislosti:</b> <i>id → meno</i>, <i>id → pohlavie</i>, resp. <i>id → {meno, pohlavie}</i>. (Meno ani pohlavie nedokážu jednoznačne určiť id, pretože viacerí ľudia sa môžu volať rovnako alebo mať rovnaké pohlavie).</li>
+      <li><b>Kandidátny kľúč:</b> <i>{id}</i> (je minimálny a jednoznačne určuje celý riadok).</li>
+      <li><b>Nadkľúč:</b> Akákoľvek množina obsahujúca <i>id</i>, napr. <i>{id}</i>, <i>{id, meno}</i>, <i>{id, pohlavie}</i>, <i>{id, meno, pohlavie}</i>.</li>
+      <li><b>Podkľúč:</b> Prázdna množina <i>∅</i> (keďže kľúč <i>{id}</i> má dĺžku 1, jeho vlastná podmnožina neobsahuje žiaden atribút).</li>
+    </ul>
+  </li>
+
+  <li>Pomocou Armstrongových pravidiel a pomocou definície dokážte:
+    <ul>
+      <li><b>(x → y) ∧ (x → z) ⇒ x → yz (Pravidlo zjednotenia / Union Rule)</b>
+        <ul>
+          <li><i>Dôkaz pomocou Armstrongových pravidiel:</i>
+            <ol>
+              <li><i>x → y</i> (dané)</li>
+              <li><i>x → z</i> (dané)</li>
+              <li>Aplikáciou pravidla rozšírenia (Augmentation) na (1) s <i>x</i> dostaneme: <i>xx → xy</i>, čo je <i>x → xy</i>.</li>
+              <li>Aplikáciou pravidla rozšírenia na (2) s <i>y</i> dostaneme: <i>xy → yz</i>.</li>
+              <li>Aplikáciou tranzitívneho pravidla (Transitivity) na <i>x → xy</i> a <i>xy → yz</i> dostaneme: <b>x → yz</b>.</li>
+            </ol>
+          </li>
+          <li><i>Dôkaz pomocou definície:</i>
+             Nech <i>t<sub>1</sub>, t<sub>2</sub></i> sú dva riadky v relácii také, že <i>t<sub>1</sub>[x] = t<sub>2</sub>[x]</i>.<br>
+             Z <i>x → y</i> vyplýva, že <i>t<sub>1</sub>[y] = t<sub>2</sub>[y]</i>.<br>
+             Z <i>x → z</i> vyplýva, že <i>t<sub>1</sub>[z] = t<sub>2</sub>[z]</i>.<br>
+             Preto <i>t<sub>1</sub>[yz] = t<sub>2</sub>[yz]</i>, z čoho vyplýva <b>x → yz</b>.
+          </li>
+        </ul>
+      </li>
+      <li><b>(x → y) ∧ (wy → z) ⇒ wx → wz (Pseudotranzitívne pravidlo / Pseudo-transitivity)</b>
+        <ul>
+          <li><i>Dôkaz pomocou Armstrongových pravidiel:</i>
+            <ol>
+              <li><i>x → y</i> (dané)</li>
+              <li><i>wy → z</i> (dané)</li>
+              <li>Aplikáciou pravidla rozšírenia na (1) s <i>w</i> dostaneme: <b>wx → wy</b>.</li>
+              <li>Aplikáciou tranzitívneho pravidla na <i>wx → wy</i> a <i>wy → z</i> dostaneme: <b>wx → wz</b>.</li>
+            </ol>
+          </li>
+          <li><i>Dôkaz pomocou definície:</i>
+            Nech <i>t<sub>1</sub>, t<sub>2</sub></i> sú dva riadky také, že <i>t<sub>1</sub>[wx] = t<sub>2</sub>[wx]</i> (teda <i>t<sub>1</sub>[w] = t<sub>2</sub>[w]</i> a <i>t<sub>1</sub>[x] = t<sub>2</sub>[x]</i>).<br>
+            Z <i>x → y</i> a <i>t<sub>1</sub>[x] = t<sub>2</sub>[x]</i> dostávame <i>t<sub>1</sub>[y] = t<sub>2</sub>[y]</i>.<br>
+            Keďže <i>t<sub>1</sub>[w] = t<sub>2</sub>[w]</i> aj <i>t<sub>1</sub>[y] = t<sub>2</sub>[y]</i>, platí <i>t<sub>1</sub>[wy] = t<sub>2</sub>[wy]</i>.<br>
+            Z <i>wy → z</i> potom vyplýva <i>t<sub>1</sub>[z] = t<sub>2</sub>[z]</i>.<br>
+            Spolu máme <i>t<sub>1</sub>[w] = t<sub>2</sub>[w]</i> a <i>t<sub>1</sub>[z] = t<sub>2</sub>[z]</i>, teda <i>t<sub>1</sub>[wz] = t<sub>2</sub>[wz]</i>. Platí <b>wx → wz</b>.
+          </li>
+        </ul>
+      </li>
+      <li><b>(x → y) ∧ (z ⊆ y) ⇒ x → z (Pravidlo dekompozície / Decomposition)</b>
+        <ul>
+          <li><i>Dôkaz pomocou Armstrongových pravidiel:</i>
+            <ol>
+              <li><i>x → y</i> (dané)</li>
+              <li>Aplikáciou reflexívneho pravidla na <i>z ⊆ y</i> dostaneme: <i>y → z</i>.</li>
+              <li>Aplikáciou tranzitívneho pravidla na <i>x → y</i> a <i>y → z</i> dostaneme: <b>x → z</b>.</li>
+            </ol>
+          </li>
+          <li><i>Dôkaz pomocou definície:</i>
+            Nech <i>t<sub>1</sub>, t<sub>2</sub></i> sú dva riadky také, že <i>t<sub>1</sub>[x] = t<sub>2</sub>[x]</i>.<br>
+            Z <i>x → y</i> vyplýva <i>t<sub>1</sub>[y] = t<sub>2</sub>[y]</i>.<br>
+            Keďže <i>z ⊆ y</i>, pod-záznam <i>z</i> je plne obsiahnutý v <i>y</i>, teda aj <i>t<sub>1</sub>[z] = t<sub>2</sub>[z]</i>.<br>
+            Platí <b>x → z</b>.
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+
+  <li>Dokážte, že NEplatí (použite kontrapríklad): (AC → B) ∧ (AC → D) ⇒ B → D
+    <p><b>Dôkaz kontrapríkladom:</b> Skonštruujme reláciu s atribútmi {A, B, C, D} a dvoma riadkami:</p>
+    <table border="1" style="border-collapse: collapse; margin-bottom: 8px;">
+      <tr><th>A</th><th>B</th><th>C</th><th>D</th></tr>
+      <tr><td>1</td><td>2</td><td>3</td><td>4</td></tr>
+      <tr><td>0</td><td>2</td><td>0</td><td>5</td></tr>
+    </table>
+    <ul>
+      <li><i>AC → B</i> platí (všetky kombinácie AC sú unikátne: (1,3) a (0,0)).</li>
+      <li><i>AC → D</i> platí (kombinácie AC sú unikátne).</li>
+      <li>Avšak <i>B → D</i> <b>NEPLATÍ</b>, pretože pre hodnotu B = 2 existujú dve rôzne hodnoty D (4 a 5).</li>
+    </ul>
+  </li>
+
+  <li>Uvažujme relačnú schému ℛ(𝒜, ℱ), kde 𝒜 = { A, B, C, D, E, F }, ℱ = { AB → C, BC → AD, D → E, CF → B }.
+    <ul>
+      <li><b>Určte {AB}<sup>+</sup>:</b>
+        <ul>
+          <li>Začiatok: <i>{AB}<sup>+</sup> = {A, B}</i></li>
+          <li>Aplikujeme <i>AB → C</i>: <i>{AB}<sup>+</sup> = {A, B, C}</i></li>
+          <li>Aplikujeme <i>BC → AD</i>: <i>{AB}<sup>+</sup> = {A, B, C, D}</i></li>
+          <li>Aplikujeme <i>D → E</i>: <i>{AB}<sup>+</sup> = {A, B, C, D, E}</i></li>
+          <li><b>Výsledok: {AB}<sup>+</sup> = {A, B, C, D, E}</b></li>
+        </ul>
+      </li>
+      <li><b>Vyplývajú z ℱ funkčné závislosti: AB → D a D → A? Prečo?</b>
+        <ul>
+          <li><i>AB → D</i>: <b>Áno</b>, pretože D ∈ {AB}<sup>+</sup> ({A, B, C, D, E}).</li>
+          <li><i>D → A</i>: <b>Nie</b>, vypočítajme uzáver <i>{D}<sup>+</sup> = {D, E}</i>. Keďže A ∉ {D}<sup>+</sup>, závislosť neplatí.</li>
+        </ul>
+      </li>
+      <li><b>Je AB kandidátný kľúč? Prečo?</b>
+        <ul>
+          <li><b>Nie</b>, pretože {AB}<sup>+</sup> = {A, B, C, D, E} ≠ 𝒜 (neobsahuje atribút F, nevie určiť celú reláciu).</li>
+        </ul>
+      </li>
+      <li><b>Vymenujte kandidátne kľúče:</b>
+        <ul>
+          <li>Atribút F sa nenachádza na pravej strane žiadnej funkčnej závislosti, preto musí byť súčasťou každého kľúča.</li>
+          <li>Spočítajme uzávery dvojíc s F a trojíc:
+            <ul>
+              <li><i>{ABF}<sup>+</sup> = {A, B, C, D, E, F} = 𝒜</i></li>
+              <li><i>{BCF}<sup>+</sup> = {A, B, C, D, E, F} = 𝒜</i></li>
+              <li><i>{ADF}<sup>+</sup> nie je kľúč</i>, ale skúsme <i>{ACF}<sup>+</sup></i>: z CF → B dostaneme B, potom AB → C..., teda <i>{ACF}<sup>+</sup> = {A, B, C, D, E, F} = 𝒜</i>.</li>
+            </ul>
+          </li>
+          <li><b>Kandidátne kľúče sú: {ABF}, {BCF}, {ACF}</b>.</li>
+        </ul>
+      </li>
+      <li><b>Je AB primárny kľúč? Prečo?</b>
+        <ul>
+          <li><b>Nie</b>, lebo nie je ani kandidátnym kľúčom.</li>
+        </ul>
+      </li>
+      <li><b>Je AB kompozitný kľúč? Prečo?</b>
+        <ul>
+          <li><b>Nie</b>, sám o sebe nie je kľúčom (aj keď sa skladá z 2 atribútov).</li>
+        </ul>
+      </li>
+      <li><b>Vymenujte nadkľúče ABF:</b>
+        <ul>
+          <li><b>{ABF}, {ABFD}, {ABFE}, {ABFDE}</b>.</li>
+        </ul>
+      </li>
+      <li><b>Vymenujte podkľúče ABF:</b>
+        <ul>
+          <li>Prázdna množina a všetky vlastné podmnožiny: <b>∅, {A}, {B}, {F}, {A, B}, {A, F}, {B, F}</b>.</li>
+        </ul>
+      </li>
+      <li><b>Určte kľúčové a nekľúčové atribúty:</b>
+        <ul>
+          <li><b>Kľúčové atribúty</b> (obsiahnuté v aspoň jednom KK = {ABF, BCF, ACF}): <b>A, B, C, F</b>.</li>
+          <li><b>Nekľúčové atribúty:</b> <b>D, E</b>.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+
+  <li>Uvažujme tabuľku ABC.
+    <ul>
+      <li><b>Navrhnite Lossless/bezstratovú dekompozíciu tabuľky ABC:</b>
+        <ul>
+          <li>Ak v ABC platí napr. <i>A → B</i>, bezstratová dekompozícia na dve relácie je: <b>R<sub>1</sub>(A, B)</b> a <b>R<sub>2</sub>(A, C)</b>. Prienik R<sub>1</sub> ∩ R<sub>2</sub> = {A}, čo je kľúčom v R<sub>1</sub>.</li>
+        </ul>
+      </li>
+      <li><b>Navrhnite Lossy/stratovú dekompozíciu tabuľky ABC:</b>
+        <ul>
+          <li>Dekompozícia na <b>R<sub>1</sub>(A, B)</b> a <b>R<sub>2</sub>(B, C)</b> pri absencii závislostí B → A alebo B → C je stratová (vzniknú falošné riadky / spurious tuples pri spojení).</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+
+  <li>Uvažujme rozklad {T1, T2} tabuľky T.
+    <ul>
+      <li><b>Presvedčte sa, že rozklad bude stratový (SQL kódom a potom aj pomocou kritéria):</b>
+        <ul>
+          <li><i>Pomocou kritéria:</i> Dekompozícia R na R<sub>1</sub> a R<sub>2</sub> je bezstratová práve vtedy, keď prienik atribútov R<sub>1</sub> ∩ R<sub>2</sub> funkčne určuje R<sub>1</sub> (R<sub>1</sub> ∩ R<sub>2</sub> → R<sub>1</sub>) alebo R<sub>2</sub> (R<sub>1</sub> ∩ R<sub>2</sub> → R<sub>2</sub>). Ak táto podmienka neplatí (prienik nie je nadkľúčom ani jednej sub-relácie), rozklad je stratový.</li>
+          <li><i>SQL kódom:</i>
+<pre><code>-- Ak prirodzené spojenie T1 a T2 vráti viac riadkov než pôvodná tabuľka T, ide o stratovú dekompozíciu:
+SELECT COUNT(*) FROM T;
+SELECT COUNT(*) FROM T1 NATURAL JOIN T2;
+-- Ak (NATURAL JOIN count) > (pôvodný count), rozklad bol stratový.
+</code></pre>
+          </li>
+        </ul>
+      </li>
+      <li><b>Zmeňte jednu hodnotu v tabuľke T, aby daný rozklad bol bezstratový (je prienik NK?):</b>
+        <ul>
+          <li>Úpravou hodnoty docielime, aby prienik atribútov obsiahnutý v oboch tabuľkách obsahoval iba unikátne hodnoty určujúce zvyšok atribútov v jednej z tabuliek. Tým sa prienik stane <b>nadkľúčom (NK)</b> danej sub-relácie.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+
+  <li>Interpretujte R<sub>1</sub> ∪ R<sub>2</sub>, R<sub>1</sub> × R<sub>2</sub> a R<sub>1</sub> ⋈ R<sub>2</sub>.
+    <ul>
+      <li><b>R<sub>1</sub> ∪ R<sub>2</sub> (Zjednotenie / Union):</b> Množina všetkých prkov/riadkov, ktoré sa nachádzajú v R<sub>1</sub>, v R<sub>2</sub> alebo v oboch. Podmienka: R<sub>1</sub> a R<sub>2</sub> musia mať rovnakú schému (rovnaké atribúty a kompatibilné domény).</li>
+      <li><b>R<sub>1</sub> × R<sub>2</sub> (Kartézsky súčin / Cartesian Product):</b> Množina všetkých možných kombinácií riadkov z R<sub>1</sub> s riadkami z R<sub>2</sub>. Ak R<sub>1</sub> má <i>m</i> riadkov a R<sub>2</sub> má <i>n</i> riadkov, výsledok má <i>m × n</i> riadkov.</li>
+      <li><b>R<sub>1</sub> ⋈ R<sub>2</sub> (Prirodzené spojenie / Natural Join):</b> Spojenie dvoch relácií cez ich spoločné atribúty, pričom vo výsledku sa zhodujú hodnoty na týchto spoločných atribútoch a spoločné atribúty sa neopakujú.</li>
+    </ul>
+  </li>
+
+  <li>Uvažujme relačnú schému ℛ(𝒜, ℱ), kde 𝒜 = { A, B, C, D }, ℱ = { ACD → B, AC → D, AC → B, D → C }.
+    <ul>
+      <li><b>Skontrolujte, že {AC}<sup>+</sup> = 𝒜 a preto AC je KK. Existuje ďalší dvojatribútový KK?</b>
+        <ul>
+          <li><i>{AC}<sup>+</sup>:</i> Začíname {A, C}. Z AC → D pridáme D → {A, C, D}. Z ACD → B (alebo AC → B) pridáme B → {A, B, C, D} = 𝒜. Teda {AC}<sup>+</sup> = 𝒜.</li>
+          <li><i>Ďalší dvojatribútový KK:</i> Skúsme <b>{AD}</b>.
+            <ul>
+              <li><i>{AD}<sup>+</sup>:</i> Začíname {A, D}. Z D → C pridáme C → {A, C, D}. Z AC → B pridáme B → {A, B, C, D} = 𝒜.</li>
+              <li>Teda <b>{AD} je ďalší dvojatribútový kandidátny kľúč</b>.</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><b>Je AC kandidátný kľúč? Prečo?</b>
+        <ul>
+          <li><b>Áno</b>, pretože {AC}<sup>+</sup> = 𝒜 (určuje všetky atribúty) a žiadna jeho vlastná podmnožina ({A}<sup>+</sup>={A}, {C}<sup>+</sup>={C}) nie je nadkľúčom.</li>
+        </ul>
+      </li>
+      <li><b>Je AC primárny kľúč? Prečo?</b>
+        <ul>
+          <li><b>Môže byť</b>, ak ho tvorca databázy zvolí spomedzi kandidátnych kľúčov ({AC}, {AD}) za hlavný identifikátor.</li>
+        </ul>
+      </li>
+      <li><b>Je AC kompozitný kľúč? Prečo?</b>
+        <ul>
+          <li><b>Áno</b>, pretože je kľúčom a skladá sa z viac ako jedného atribútu (z dvoch: A a C).</li>
+        </ul>
+      </li>
+      <li><b>Je AC nadkľúč? Prečo?</b>
+        <ul>
+          <li><b>Áno</b>, každý kandidátny kľúč je zároveň aj minimálnym nadkľúčom, lebo {AC}<sup>+</sup> = 𝒜.</li>
+        </ul>
+      </li>
+      <li><b>Je AD podkľúč? Prečo?</b>
+        <ul>
+          <li><b>Nie</b>, AD je sám o sebe kandidátny kľúč (nie je vlastnou podmnožinou nejakého väčšieho kľúča).</li>
+        </ul>
+      </li>
+      <li><b>Je ℛ v 2NF? Prečo?</b>
+        <ul>
+          <li>Kandidátne kľúče sú {AC} a {AD}. Kľúčové atribúty sú {A, C, D}, nekľúčový je {B}.</li>
+          <li>Závislosti s B na pravej strane sú <i>AC → B</i> a <i>ACD → B</i>. B závisí od CELÉHO kľúča AC (nie od samotného A ani samotného C).</li>
+          <li><b>Áno, relácia je v 2NF</b>, lebo neexistuje čiastočná závislosť nekľúčového atribútu od časti kľúča.</li>
+        </ul>
+      </li>
+      <li><b>Je ℛ v 3NF? Prečo?</b>
+        <ul>
+          <li>Skontrolujme netriviálne funkčné závislosti v ℱ:
+            <ol>
+              <li><i>AC → D</i>: AC je nadkľúč (Platí).</li>
+              <li><i>AC → B</i>: AC je nadkľúč (Platí).</li>
+              <li><i>D → C</i>: D nie je nadkľúč, <b>ALE C je kľúčový atribút</b> (patrí do KK {AC}). Tým pádom podmienka 3NF stopercentne platí!</li>
+            </ol>
+          </li>
+          <li><b>Áno, relácia je v 3NF.</b></li>
+        </ul>
+      </li>
+      <li><b>Je ℛ v HBCNF? Prečo?</b>
+        <ul>
+          <li>Podmienka BCNF vyžaduje, aby na ľavej strane KAŽDEJ netriviálnej závislosti bol nadkľúč.</li>
+          <li>Uvažujme závislosť <b>D → C</b>: D nie je nadkľúč (keďže {D}<sup>+</sup> = {C, D} ≠ 𝒜).</li>
+          <li><b>Nie, relácia NIE JE v BCNF / HBCNF</b> kvôli závislosti <i>D → C</i>.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
